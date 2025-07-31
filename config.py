@@ -1,0 +1,8 @@
+NUM_CLASSES = 4
+BATCH_SIZE = 16
+EPOCHS = 15
+LEARNING_RATE = 2e-5
+THRESHOLD = 0.7  # For "medical" vs "non-medical" decision
+IMAGE_SIZE = 224
+DEVICE = "cpu"
+DATA_DIR = "medical-image-classifier"

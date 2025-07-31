@@ -3,3 +3,4 @@ torchvision
 transformers
 Pillow
 numpy
+tqdm

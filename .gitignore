@@ -3,3 +3,4 @@ mri/
 ultrasound/
 venv/
 x-ray/
+__pycache__/

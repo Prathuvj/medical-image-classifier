@@ -47,12 +47,12 @@ if upload_type == "📤 Upload File":
         if ext == "pdf":
             results = infer_from_pdf(file.read())
             for idx, (image, label, confidence) in enumerate(results):
-                st.image(image, caption=f"Prediction: {label} (Confidence: {confidence:.2f})", use_column_width=True)
+                st.image(image, caption=f"Prediction: {label} (Confidence: {confidence:.2f})", use_container_width=True)
 
         elif ext in ["jpg", "jpeg", "png"]:
             image = Image.open(file).convert("RGB")
             label, confidence = infer_from_image(image)
-            st.image(image, caption=f"Prediction: {label} (Confidence: {confidence:.2f})", use_column_width=True)
+            st.image(image, caption=f"Prediction: {label} (Confidence: {confidence:.2f})", use_container_width=True)
 
         else:
             st.error("Unsupported file type.")
@@ -69,12 +69,12 @@ elif upload_type == "🔗 Enter URL":
             if "pdf" in content_type or url.endswith(".pdf"):
                 results = infer_from_pdf(content)
                 for idx, (image, label, confidence) in enumerate(results):
-                    st.image(image, caption=f"Prediction: {label} (Confidence: {confidence:.2f})", use_column_width=True)
+                    st.image(image, caption=f"Prediction: {label} (Confidence: {confidence:.2f})", use_container_width=True)
 
             elif "image" in content_type or any(url.endswith(ext) for ext in ["jpg", "jpeg", "png"]):
                 image = Image.open(io.BytesIO(content)).convert("RGB")
                 label, confidence = infer_from_image(image)
-                st.image(image, caption=f"Prediction: {label} (Confidence: {confidence:.2f})", use_column_width=True)
+                st.image(image, caption=f"Prediction: {label} (Confidence: {confidence:.2f})", use_container_width=True)
 
             else:
                 st.error("URL must point to a valid image or PDF.")

@@ -1,5 +1,3 @@
-# train_resnet.py
-
 import os
 import torch
 from torch import nn
@@ -8,15 +6,13 @@ from torchvision import datasets, transforms, models
 from tqdm import tqdm
 from config import *
 
-# Image transforms
 transform = transforms.Compose([
     transforms.Resize((IMAGE_SIZE, IMAGE_SIZE)),
     transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406],  # ImageNet means
-                         std=[0.229, 0.224, 0.225])    # ImageNet stds
+    transforms.Normalize(mean=[0.485, 0.456, 0.406],  
+                         std=[0.229, 0.224, 0.225])
 ])
 
-# Dataset and Dataloaders
 dataset = datasets.ImageFolder(root=DATA_DIR, transform=transform)
 train_size = int(0.8 * len(dataset))
 val_size = len(dataset) - train_size
@@ -24,20 +20,16 @@ train_ds, val_ds = torch.utils.data.random_split(dataset, [train_size, val_size]
 train_loader = DataLoader(train_ds, batch_size=BATCH_SIZE, shuffle=True)
 val_loader = DataLoader(val_ds, batch_size=BATCH_SIZE)
 
-# Load pretrained ResNet-50
 model = models.resnet50(pretrained=True)
-model.fc = nn.Linear(model.fc.in_features, NUM_CLASSES)  # Replace final layer
+model.fc = nn.Linear(model.fc.in_features, NUM_CLASSES)
 model.to(DEVICE)
 
-# Loss & Optimizer
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.AdamW(model.parameters(), lr=LEARNING_RATE)
 
-# Best model tracking
 best_accuracy = 0.0
 best_model_path = "best_resnet_medical_classifier.pth"
 
-# Training loop
 for epoch in range(EPOCHS):
     model.train()
     total_loss = 0
@@ -60,7 +52,6 @@ for epoch in range(EPOCHS):
 
     print(f"Train Loss: {total_loss / len(train_loader):.4f}")
 
-    # Validation loop
     model.eval()
     correct = 0
     total = 0
@@ -77,7 +68,6 @@ for epoch in range(EPOCHS):
     val_acc = correct / total
     print(f"Validation Accuracy: {val_acc:.4f}")
 
-    # Save best model
     if val_acc > best_accuracy:
         best_accuracy = val_acc
         torch.save(model.state_dict(), best_model_path)

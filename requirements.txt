@@ -4,3 +4,6 @@ transformers
 Pillow
 numpy
 tqdm
+pdf2image 
+beautifulsoup4 
+requests

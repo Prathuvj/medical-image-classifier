@@ -4,6 +4,6 @@ transformers
 Pillow
 numpy
 tqdm
-pdf2image 
+pymupdf
 beautifulsoup4 
 requests

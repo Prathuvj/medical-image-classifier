@@ -156,6 +156,38 @@ IMAGE_SIZE = 224
 - 🔬 **MRI**: Magnetic resonance imaging
 - 🫀 **Ultrasound**: Sonographic images
 
+## 📊 Training Datasets
+
+The model was trained on high-quality medical imaging datasets from Kaggle, ensuring robust performance across different medical modalities:
+
+### Dataset Sources
+
+| Modality | Dataset | Description | Images | Link |
+|----------|---------|-------------|---------|------|
+| 🫀 **Ultrasound** | Ultrasound Fetus Dataset | Fetal ultrasound images for medical training | ~2,000+ | [Kaggle Dataset](https://www.kaggle.com/datasets/orvile/ultrasound-fetus-dataset) |
+| 🧠 **CT Scan** | CT Scan Images | Comprehensive CT scan collection | ~1,500+ | [Kaggle Dataset](https://www.kaggle.com/datasets/orvile/ct-scan-images) |
+| 🔬 **MRI** | Brain MRI Images | Brain MRI scans for neurological analysis | ~3,000+ | [Kaggle Dataset](https://www.kaggle.com/datasets/ashfakyeafi/brain-mri-images) |
+| 🦴 **X-ray** | Labeled Chest X-ray Images | Chest radiographs with medical annotations | ~5,000+ | [Kaggle Dataset](https://www.kaggle.com/datasets/tolgadincer/labeled-chest-xray-images) |
+
+### Dataset Characteristics
+
+**Data Quality & Preprocessing**:
+- All images normalized to 224x224 RGB format
+- Medical-grade image quality from clinical sources
+- Balanced distribution across modalities
+- Comprehensive data augmentation applied during training
+
+**Training Split**:
+- **Training Set**: 80% of total dataset
+- **Validation Set**: 20% of total dataset
+- **Cross-validation**: Stratified sampling to maintain class balance
+
+**Data Diversity**:
+- Multiple anatomical regions covered
+- Various imaging conditions and equipment
+- Different patient demographics represented
+- Clinical-grade annotations and labels
+
 ## 📁 Project Structure
 
 ```

@@ -1,5 +1,3 @@
-# run_pipeline.py
-
 import os
 import argparse
 from predict import classify_image

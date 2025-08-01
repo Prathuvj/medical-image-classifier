@@ -4,7 +4,6 @@ from torchvision import transforms, models
 from PIL import Image
 from config import *
 
-# Define the same transform used during training
 transform = transforms.Compose([
     transforms.Resize((IMAGE_SIZE, IMAGE_SIZE)),
     transforms.ToTensor(),
@@ -12,18 +11,15 @@ transform = transforms.Compose([
                          std=[0.229, 0.224, 0.225]),
 ])
 
-# Load class names (based on folder names)
 import os
 class_names = sorted([d for d in os.listdir(DATA_DIR) if os.path.isdir(os.path.join(DATA_DIR, d))])
 
-# Load model and weights
 model = models.resnet50(pretrained=False)
 model.fc = torch.nn.Linear(model.fc.in_features, NUM_CLASSES)
 model.load_state_dict(torch.load("best_resnet_medical_classifier.pth", map_location=DEVICE))
 model.to(DEVICE)
 model.eval()
 
-# Inference function
 def classify_image(img_path, threshold=THRESHOLD):
     image = Image.open(img_path).convert("RGB")
     image = transform(image).unsqueeze(0).to(DEVICE)

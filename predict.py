@@ -1,32 +1,48 @@
 import torch
 import torch.nn.functional as F
-from torchvision import transforms
-from transformers import AutoImageProcessor, ResNetForImageClassification
+from torchvision import transforms, models
 from PIL import Image
 from config import *
 
-model = ResNetForImageClassification.from_pretrained("microsoft/resnet-50", num_labels=NUM_CLASSES)
-model.load_state_dict(torch.load("resnet_medical_classifier.pth", map_location=DEVICE))
+# Define the same transform used during training
+transform = transforms.Compose([
+    transforms.Resize((IMAGE_SIZE, IMAGE_SIZE)),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                         std=[0.229, 0.224, 0.225]),
+])
+
+# Load class names (based on folder names)
+import os
+class_names = sorted([d for d in os.listdir(DATA_DIR) if os.path.isdir(os.path.join(DATA_DIR, d))])
+
+# Load model and weights
+model = models.resnet50(pretrained=False)
+model.fc = torch.nn.Linear(model.fc.in_features, NUM_CLASSES)
+model.load_state_dict(torch.load("best_resnet_medical_classifier.pth", map_location=DEVICE))
 model.to(DEVICE)
 model.eval()
 
-processor = AutoImageProcessor.from_pretrained("microsoft/resnet-50")
-
+# Inference function
 def classify_image(img_path, threshold=THRESHOLD):
     image = Image.open(img_path).convert("RGB")
-    inputs = processor(images=image, return_tensors="pt").to(DEVICE)
-    
+    image = transform(image).unsqueeze(0).to(DEVICE)
+
     with torch.no_grad():
-        logits = model(**inputs).logits
+        logits = model(image)
         probs = F.softmax(logits, dim=1)
         max_prob, pred_class = torch.max(probs, dim=1)
-    
-    if max_prob.item() < threshold:
-        return "non-medical"
+
+    confidence = max_prob.item()
+    label = class_names[pred_class.item()]
+
+    if confidence < threshold:
+        return "non-medical", confidence
     else:
-        return "medical"
+        return f"medical ({label})", confidence
 
 if __name__ == "__main__":
-    path = input("Enter image path: ")
-    result = classify_image(path)
-    print(f"Prediction: {result}")
+    img_path = input("Enter image path: ").strip()
+    prediction, confidence = classify_image(img_path)
+    print(f"Prediction: {prediction}")
+    print(f"Confidence: {confidence:.2f}")

@@ -7,3 +7,5 @@ tqdm
 pymupdf
 beautifulsoup4 
 requests
+streamlit
+flask

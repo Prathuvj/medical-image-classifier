@@ -1,90 +1,246 @@
 # 🧠 Medical vs Non-Medical Image Classifier
 
-This project is a complete end-to-end solution to classify images as **medical** or **non-medical** using a fine-tuned ResNet-50 model.
+A production-ready, end-to-end deep learning solution for classifying images as **medical** or **non-medical** using a fine-tuned ResNet-50 model. This system supports multiple medical imaging modalities and provides both API and web interfaces for seamless integration.
 
-It supports:
-- ✅ Training on multiple medical modalities (X-ray, CT, MRI, Ultrasound)
-- ✅ Inference via uploaded images or PDFs
-- ✅ API for programmatic access (Flask)
-- ✅ Interactive frontend (Streamlit)
-- ✅ Postman/URL testing
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)](https://pytorch.org)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
----
+## ✨ Key Features
 
-## 🚀 Features
+- 🏥 **Multi-Modal Support**: Trained on X-ray, CT, MRI, and Ultrasound images
+- 📄 **PDF Processing**: Automatically extracts and classifies images from PDF documents
+- 🌐 **URL Support**: Process images directly from web URLs
+- 🚀 **Dual Interface**: REST API for integration + Interactive web UI for testing
+- 🎯 **Confidence Thresholding**: Smart detection of non-medical images
+- ⚡ **In-Memory Processing**: Efficient handling without temporary file storage
+- 🔧 **Production Ready**: Comprehensive error handling and logging
 
-| Component       | Description                                  |
-|-----------------|----------------------------------------------|
-| 🧠 Model        | ResNet-50 (torchvision), fine-tuned          |
-| 📥 Inputs       | PDF, image upload, or image/PDF URL          |
-| 🧪 Inference    | Classifies each image as "medical" or "non-medical" |
-| 🖥️ Frontend     | Streamlit UI for manual testing              |
-| 🧵 Backend      | Flask API for integration or Postman testing |
-| 🧰 Tools        | PyTorch, PIL, PyMuPDF, BeautifulSoup, Streamlit, Flask |
+## 🏗️ Architecture Overview
 
----
-
-## ⚙️ Setup Instructions
-
-### 1. Clone the repo & install dependencies
-```bash
-pip install -r requirements.txt
+```
+Input Sources          Processing Pipeline         Output
+┌─────────────┐       ┌─────────────────────┐    ┌──────────────┐
+│ Image Files │────►  │                     │    │              │
+│ PDF Files   │────►  │   ResNet-50 Model   │───►│ Classification│
+│ Web URLs    │────►  │   (Fine-tuned)      │    │ + Confidence │
+└─────────────┘       └─────────────────────┘    └──────────────┘
 ```
 
-### 2. Train (optional, already trained model provided)
+## 🚀 Quick Start
+
+### Prerequisites
+- Python 3.8 or higher
+- pip package manager
+- 4GB+ RAM recommended
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd medical-image-classifier
+   ```
+
+2. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Download pre-trained model** (if not included)
+   ```bash
+   # Model file: best_resnet_medical_classifier.pth should be in root directory
+   ```
+
+4. **Start the application**
+   ```bash
+   python start_app.py
+   ```
+
+### Alternative Setup Options
+
+**Option 1: API Only**
 ```bash
-python train_resnet.py
+python app.py
 ```
 
-### 3. Start full app (API + UI)
+**Option 2: Web UI Only**
 ```bash
-python start_app.py
+streamlit run app_streamlit.py
 ```
 
----
+**Option 3: Command Line Interface**
+```bash
+python run_pipeline.py <pdf_path_or_url>
+```
 
-## 🧪 Test the API
+## 📖 Usage Guide
 
-### 📤 Via Postman (or curl)
+### 🌐 Web Interface
 
-**Endpoint:** `http://127.0.0.1:5000/predict`  
-**Method:** POST
+1. Navigate to `http://localhost:8501`
+2. Choose input method:
+   - **Upload File**: Drag & drop images or PDFs
+   - **Enter URL**: Paste direct links to images or PDFs
+3. View results with confidence scores and image previews
 
-**Option 1: Upload file (image or PDF)**  
-Use form-data, key = `file`, value = upload file
+### 🔌 REST API
 
-**Option 2: Provide URL**  
-Content-Type: application/json
+**Base URL**: `http://127.0.0.1:5000`
 
+#### Endpoint: `/predict`
+**Method**: `POST`
+
+**Option 1: File Upload**
+```bash
+curl -X POST -F "file=@sample.jpg" http://127.0.0.1:5000/predict
+```
+
+**Option 2: URL Processing**
+```bash
+curl -X POST -H "Content-Type: application/json" \
+     -d '{"url": "https://example.com/medical-scan.pdf"}' \
+     http://127.0.0.1:5000/predict
+```
+
+**Response Format**:
 ```json
 {
-  "url": "https://example.com/sample.pdf"
+  "status": "success",
+  "results": [
+    {
+      "image": "image_name.jpg",
+      "prediction": "medical (x-ray)",
+      "confidence": 0.9234
+    }
+  ]
 }
 ```
 
----
+### 🖥️ Command Line Interface
 
-## 🖥️ Use the Streamlit App
-
-After running:
+**Process PDF or URL**:
 ```bash
-python start_app.py
-```
-Visit:
-
-```
-http://localhost:8501
+python run_pipeline.py path/to/document.pdf
+python run_pipeline.py https://example.com/medical-images.pdf
 ```
 
-There you can:
-- Upload images or PDFs
-- Enter image/PDF URLs
-- View predictions with confidence and preview
+**Single Image Classification**:
+```bash
+python predict.py
+# Enter image path when prompted
+```
 
----
+## 🎯 Model Architecture & Performance
 
-## 🎯 Model Details
+### Model Specifications
+- **Base Architecture**: ResNet-50 (torchvision)
+- **Input Size**: 224x224 RGB images
+- **Classes**: 4 medical modalities + non-medical detection
+- **Framework**: PyTorch 2.0+
+- **Optimization**: AdamW optimizer with learning rate 2e-5
 
-- Based on `torchvision.models.resnet50`
-- Trained on 4-class medical data: **X-ray, CT, MRI, Ultrasound**
-- Inference uses confidence threshold to detect non-medical images
+### Training Configuration
+```python
+NUM_CLASSES = 4
+BATCH_SIZE = 16
+EPOCHS = 15
+LEARNING_RATE = 2e-5
+THRESHOLD = 0.85
+IMAGE_SIZE = 224
+```
+
+### Supported Medical Modalities
+- 🦴 **X-ray**: Radiographic images
+- 🧠 **CT Scan**: Computed tomography
+- 🔬 **MRI**: Magnetic resonance imaging
+- 🫀 **Ultrasound**: Sonographic images
+
+## 📁 Project Structure
+
+```
+medical-image-classifier/
+├── 📄 README.md                    # Project documentation
+├── 🐍 app.py                      # Flask REST API server
+├── 🎨 app_streamlit.py            # Streamlit web interface
+├── ⚙️ config.py                   # Configuration settings
+├── 🧠 best_resnet_medical_classifier.pth  # Pre-trained model
+├── 🔧 train_resnet.py             # Model training script
+├── 🎯 predict.py                  # Inference engine
+├── 📤 extract_images.py           # PDF/URL image extraction
+├── 🚀 start_app.py                # Application launcher
+├── 🔄 run_pipeline.py             # CLI batch processing
+├── 🛠️ utils.py                    # Utility functions
+├── 📋 requirements.txt            # Python dependencies
+└── 🚫 .gitignore                  # Git ignore rules
+```
+
+## 🔧 Configuration
+
+### Environment Variables
+```bash
+# Optional: Set device preference
+export DEVICE="cuda"  # or "cpu"
+
+# Optional: Adjust confidence threshold
+export THRESHOLD="0.85"
+```
+
+### Custom Training
+To retrain the model with your own data:
+
+1. **Organize your dataset**:
+   ```
+   images/
+   ├── ct-scan/
+   ├── mri/
+   ├── ultrasound/
+   └── x-ray/
+   ```
+
+2. **Start training**:
+   ```bash
+   python train_resnet.py
+   ```
+
+3. **Monitor progress**: Training logs show loss and validation accuracy
+
+## 🧪 Testing & Validation
+
+### API Testing with curl
+```bash
+# Test image upload
+curl -X POST -F "file=@test_image.jpg" http://127.0.0.1:5000/predict
+
+# Test URL processing
+curl -X POST -H "Content-Type: application/json" \
+     -d '{"url": "https://example.com/scan.pdf"}' \
+     http://127.0.0.1:5000/predict
+```
+
+### Batch Processing
+```bash
+# Process multiple files
+python run_pipeline.py document1.pdf
+python run_pipeline.py https://medical-site.com/scans.pdf
+```
+
+## 🚨 Error Handling
+
+The system handles various error scenarios:
+- **Unsupported file formats**: Returns clear error messages
+- **Network timeouts**: Graceful handling of URL fetch failures
+- **Corrupted files**: Validation and error reporting
+- **Memory constraints**: Efficient processing for large files
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

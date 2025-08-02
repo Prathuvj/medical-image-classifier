@@ -188,6 +188,24 @@ The model was trained on high-quality medical imaging datasets from Kaggle, ensu
 - Different patient demographics represented
 - Clinical-grade annotations and labels
 
+## 🧪 Model Testing & Validation
+
+### Independent Test Results
+
+The model was evaluated on a separate test dataset to validate its real-world performance:
+
+![Testing Results](testing.png)
+
+### Test Dataset Specifications
+
+| Metric | Value |
+|--------|-------|
+| **Total Test Images** | 86 |
+| **Medical Images** | Mixed modalities (X-ray, CT, MRI, Ultrasound) |
+| **Non-Medical Images** | Various everyday objects and scenes |
+| **Final Accuracy** | **93.02%** |
+| **Test Method** | Independent validation set |
+
 ## 📁 Project Structure
 
 ```

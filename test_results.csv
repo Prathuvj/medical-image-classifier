@@ -1,0 +1,87 @@
+Filename,Prediction,Confidence
+ucQWY (1).jpeg,medical (x-ray),1
+ucQWY (1).jpg,medical (x-ray),0.9798
+ucQWY (1).png,medical (ultrasound),1
+ucQWY (10).jpeg,medical (x-ray),1
+ucQWY (10).jpg,non-medical,0.8153
+ucQWY (10).png,medical (ultrasound),1
+ucQWY (11).jpg,medical (ct-scan),0.9178
+ucQWY (11).png,medical (ultrasound),0.9998
+ucQWY (12).jpg,non-medical,0.5017
+ucQWY (12).png,medical (ultrasound),0.9998
+ucQWY (13).jpg,non-medical,0.6727
+ucQWY (14).jpg,non-medical,0.6093
+ucQWY (15).jpg,non-medical,0.774
+ucQWY (16).jpg,non-medical,0.377
+ucQWY (17).jpg,non-medical,0.5968
+ucQWY (18).jpg,non-medical,0.6155
+ucQWY (19).jpg,non-medical,0.7327
+ucQWY (2).jpeg,medical (x-ray),1
+ucQWY (2).jpg,non-medical,0.7872
+ucQWY (2).png,medical (ultrasound),1
+ucQWY (20).jpg,non-medical,0.3555
+ucQWY (21).jpg,medical (ct-scan),0.9983
+ucQWY (22).jpg,medical (ct-scan),0.9996
+ucQWY (23).jpg,medical (ct-scan),0.9998
+ucQWY (24).jpg,non-medical,0.822
+ucQWY (25).jpg,non-medical,0.5318
+ucQWY (26).jpg,non-medical,0.6694
+ucQWY (27).jpg,medical (ct-scan),0.9052
+ucQWY (28).jpg,medical (ct-scan),0.8511
+ucQWY (29).jpg,non-medical,0.817
+ucQWY (3).jpeg,medical (x-ray),1
+ucQWY (3).jpg,non-medical,0.7386
+ucQWY (3).png,medical (ultrasound),0.9997
+ucQWY (30).jpg,medical (ct-scan),0.8832
+ucQWY (31).jpg,non-medical,0.545
+ucQWY (32).jpg,medical (ct-scan),0.8966
+ucQWY (33).jpg,medical (mri),0.9992
+ucQWY (34).jpg,medical (mri),0.999
+ucQWY (35).jpg,medical (mri),0.9979
+ucQWY (36).jpg,medical (mri),0.9991
+ucQWY (37).jpg,medical (mri),0.9981
+ucQWY (38).jpg,medical (mri),0.9983
+ucQWY (39).jpg,medical (mri),0.9984
+ucQWY (4).jpeg,medical (x-ray),1
+ucQWY (4).jpg,non-medical,0.7127
+ucQWY (4).png,medical (ultrasound),1
+ucQWY (40).jpg,medical (mri),0.9973
+ucQWY (41).jpg,medical (mri),0.9982
+ucQWY (42).jpg,medical (mri),0.9988
+ucQWY (43).jpg,medical (mri),0.9979
+ucQWY (44).jpg,medical (mri),0.9984
+ucQWY (45).jpg,non-medical,0.532
+ucQWY (46).jpg,medical (mri),0.8998
+ucQWY (47).jpg,non-medical,0.6363
+ucQWY (48).jpg,non-medical,0.4484
+ucQWY (49).jpg,non-medical,0.3325
+ucQWY (5).jpeg,medical (x-ray),1
+ucQWY (5).jpg,non-medical,0.5917
+ucQWY (5).png,medical (ultrasound),0.9997
+ucQWY (50).jpg,non-medical,0.4667
+ucQWY (51).jpg,non-medical,0.4321
+ucQWY (52).jpg,non-medical,0.5254
+ucQWY (53).jpg,non-medical,0.573
+ucQWY (54).jpg,non-medical,0.6238
+ucQWY (55).jpg,non-medical,0.5209
+ucQWY (56).jpg,non-medical,0.7895
+ucQWY (57).jpg,non-medical,0.5058
+ucQWY (58).jpg,non-medical,0.633
+ucQWY (59).jpg,non-medical,0.4891
+ucQWY (6).jpeg,medical (x-ray),1
+ucQWY (6).jpg,non-medical,0.4854
+ucQWY (6).png,medical (ultrasound),1
+ucQWY (60).jpg,non-medical,0.394
+ucQWY (61).jpg,non-medical,0.6517
+ucQWY (62).jpg,non-medical,0.6184
+ucQWY (63).jpg,non-medical,0.4594
+ucQWY (64).jpg,non-medical,0.7018
+ucQWY (7).jpeg,medical (x-ray),1
+ucQWY (7).jpg,medical (x-ray),0.9144
+ucQWY (7).png,medical (ultrasound),1
+ucQWY (8).jpeg,medical (x-ray),1
+ucQWY (8).jpg,non-medical,0.5249
+ucQWY (8).png,medical (ultrasound),0.9999
+ucQWY (9).jpeg,medical (x-ray),1
+ucQWY (9).jpg,non-medical,0.6283
+ucQWY (9).png,medical (ultrasound),1

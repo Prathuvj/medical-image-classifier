@@ -206,25 +206,6 @@ The model was evaluated on a separate test dataset to validate its real-world pe
 | **Final Accuracy** | **93.02%** |
 | **Test Method** | Independent validation set |
 
-## 📁 Project Structure
-
-```
-medical-image-classifier/
-├── 📄 README.md                    # Project documentation
-├── 🐍 app.py                      # Flask REST API server
-├── 🎨 app_streamlit.py            # Streamlit web interface
-├── ⚙️ config.py                   # Configuration settings
-├── 🧠 best_resnet_medical_classifier.pth  # Pre-trained model
-├── 🔧 train_resnet.py             # Model training script
-├── 🎯 predict.py                  # Inference engine
-├── 📤 extract_images.py           # PDF/URL image extraction
-├── 🚀 start_app.py                # Application launcher
-├── 🔄 run_pipeline.py             # CLI batch processing
-├── 🛠️ utils.py                    # Utility functions
-├── 📋 requirements.txt            # Python dependencies
-└── 🚫 .gitignore                  # Git ignore rules
-```
-
 ## 🔧 Configuration
 
 ### Environment Variables

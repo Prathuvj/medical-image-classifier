@@ -5,3 +5,4 @@ venv/
 x-ray/
 __pycache__/
 images/
+test_images/*
